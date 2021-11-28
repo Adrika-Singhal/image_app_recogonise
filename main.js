@@ -17,4 +17,31 @@ function take_snap(){
 
 console.log('ml5 version is ', ml5.version);
 
-classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/N3VMAaoUh/',model_loaded);
+classifier = ml5.imageClassifier('link of model',model_loaded);
+
+function model_loaded()
+{
+    console.log("Model loaded! ");
+}
+
+function check(){
+
+    img = document.getElementById('captured_image');
+    classifier.classify(img,gotResult);
+}
+
+function gotResult(error,result){
+    if(error){
+        console.error(error);  
+    }
+    else {
+        console.log(result);
+        document.getElementById("objectname").innerHTML = result[0].label;
+        document.getElementById("accuracy").innerHTML = result[0].confidence.toFixed(3);
+
+    }
+} 
+
+
+
+
